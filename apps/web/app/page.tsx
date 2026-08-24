@@ -1,15 +1,20 @@
 import Image, { type ImageProps } from "next/image";
 import { Button } from "@repo/ui/button";
 import styles from "./page.module.css";
+import { client } from "@repo/db/client";
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
   srcDark: string;
 };
 
+client.user.findMany().then((users) => {
+  console.log("users", users);
+});
+
+
 const ThemeImage = (props: Props) => {
   const { srcLight, srcDark, ...rest } = props;
-
   return (
     <>
       <Image {...rest} src={srcLight} className="imgLight" />
